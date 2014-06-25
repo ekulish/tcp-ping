@@ -36,10 +36,9 @@ func init() {
 }
 
 func main() {
-	flag.Parse()
-
 	var err error
 
+	flag.Parse()
 	// create/open file log, if file name presents as a command line argument
 	if flagFile != "" {
 		logFile, err = os.Create(flagFile)
@@ -51,7 +50,6 @@ func main() {
 	}
 
 	c := make(chan string)
-
 	host := fmt.Sprintf("%v:%v", flagHost, flagPort)
 
 	// execute dail in separate routine to the defined host:port until program is killed
@@ -70,7 +68,6 @@ func main() {
 		}()
 
 		printLog(<-c)
-
 		time.Sleep(time.Duration(flagPeriod) * time.Second)
 	}
 }
